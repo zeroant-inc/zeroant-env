@@ -1,6 +1,6 @@
 {
 	"name": "zeroant-env",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "environment configuration",
 	"main": "lib/index.js",
 	"scripts": {
