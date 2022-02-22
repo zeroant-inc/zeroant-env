@@ -1,10 +1,3 @@
-# zeroant
-
-THE JS Environment For You
-
-# sample
-
-<pre>
 import path from "path";
 import { Environment as EnvironmentClass, Config } from "./index";
 import http, { IncomingMessage, ServerResponse } from "http";
@@ -49,4 +42,3 @@ environment.once("ready", () => {
         environment.logger.info(`App started on ${environment.App.PORT}`);
     });
 });
-</pre>

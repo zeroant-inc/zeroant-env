@@ -6,18 +6,18 @@ const environment = new Environment({
     name: "",
     debug: true,
     env: "development",
-    file:{ 
-      path: path.resolve(__dirname, "../.env"),
-      ...secretFile.file,
+    file: {
+        path: path.resolve(__dirname, "../.env"),
+        ...secretFile.file,
     },
     basePath: path.resolve(__dirname, "../"),
     firestore: {
         serviceAccount: path.resolve(__dirname, "../firebase-config.json"),
-       ...secretFile.firebase,
+        ...secretFile.firebase,
     },
     aws: secretFile.aws,
-    http:{
-        url:"https://raw.githubusercontent.com/leantony/ecommerce/728d664fb1e8613ad18d243cc9357ffc6a0882b4/.env.sample"
+    http: {
+        url: "https://raw.githubusercontent.com/leantony/ecommerce/728d664fb1e8613ad18d243cc9357ffc6a0882b4/.env.sample"
     }
 });
 class AppConfig extends Config {

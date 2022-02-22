@@ -4,3 +4,4 @@ tsconfig.build.json
 tsconfig.json
 secret.key
 firebase-config.json
+*test.{ts,js}
