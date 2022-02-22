@@ -1,11 +1,4 @@
-# zeroant
-
-THE JS Environment For You
-
-# sample
-
-<pre>
-   import path from "path";
+import path from "path";
 import { Environment, Config } from "./index";
 const secretFile = require("../secret.key");
 
@@ -46,4 +39,3 @@ environment.once("ready", () => {
         environment.assert(environment.config.Auth?.AUTH_FILE == null, "environment.Auth.AUTH_FILE should be different from null");
     });
 });
-</pre>

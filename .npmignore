@@ -1,0 +1,6 @@
+src
+.prettierrc
+tsconfig.build.json
+tsconfig.json
+secret.key
+firebase-config.json

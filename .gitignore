@@ -1,0 +1,13 @@
+node_modules
+dist
+logs
+application
+*.env
+!.sample.env
+.DS_Store
+*.gql
+/coverage
+tslint-to-eslint-config.log
+lib
+secret.key
+firebase-config.json
