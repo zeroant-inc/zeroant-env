@@ -49,5 +49,16 @@
 		"shortid": "^2.2.16",
 		"winston": "^3.6.0",
 		"winston-daily-rotate-file": "^4.6.1"
-	}
+	},
+	"directories": {
+		"lib": "lib"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zeroant-inc/zeroant-env.git"
+	},
+	"bugs": {
+		"url": "https://github.com/zeroant-inc/zeroant-env/issues"
+	},
+	"homepage": "https://github.com/zeroant-inc/zeroant-env#readme"
 }
