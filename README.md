@@ -11,11 +11,11 @@ import http, { IncomingMessage, ServerResponse } from "http";
 const secretFile = require("../secret.key") || {};
 class Environment extends EnvironmentClass {
     onReady() {
-        this.config.set(AppConfig);
+        this.set(AppConfig);
         return this;
     }
     get App(): AppConfig {
-        return this.config.get("App");
+        return this.get("App");
     }
 }
 class AppConfig extends Config {
@@ -50,3 +50,7 @@ environment.once("ready", () => {
     });
 });
 </pre>
+
+#### CHANGE LOG
+###### Version 0.0.9 
+<p>changed enviromment.config.(get,set) to enviromment.(get,set)</p>

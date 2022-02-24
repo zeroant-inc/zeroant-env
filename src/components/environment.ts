@@ -158,7 +158,7 @@ export class Environment extends EventEmitter {
     get ErrorHandler() {
         return this._ErrorHandler;
     }
-    registerConfig(key: string | ConfigConstructable, value?: ConfigConstructable) {
+    protected registerConfig(key: string | ConfigConstructable, value?: ConfigConstructable) {
         let config;
         if (typeof key !== "string") {
             config = new key(this);
@@ -177,26 +177,16 @@ export class Environment extends EventEmitter {
     get logger() {
         return Logger;
     }
-    get config() {
-        const get = <T extends Config>(key: string): T => {
-            return this.getConfig<T>(key);
-        };
-        const set = (key: string | ConfigConstructable, value?: ConfigConstructable) => {
-            return this.registerConfig(key, value);
-        };
-        const registries: Record<string, Config> = {};
-        for (const key of this._registry.keys()) {
-            registries[key] = this._registry.get(key)!;
-        }
-        return { get, set, ...registries } as {
-            get: <T extends Config>(key: string) => T;
-            set: (key: string | ConfigConstructable, value?: ConfigConstructable | undefined) => any
-        } & { [k in keyof typeof registries]?: typeof registries[k] };
-    }
-    getConfig<T extends Config>(key: string): T {
+    protected getConfig<T extends Config>(key: string): T {
         if (!this._registry.has(key)) throw new ServerError("unable to fetch unknown environment for `" + key + "` config");
         return this._registry.get(key)! as T;
     }
+    get = <T extends Config>(key: string): T => {
+        return this.getConfig<T>(key);
+    };
+    set = (key: string | ConfigConstructable, value?: ConfigConstructable) => {
+        return this.registerConfig(key, value);
+    };
 }
 
 export default Environment;
