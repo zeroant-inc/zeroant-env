@@ -7,8 +7,8 @@ class Environment extends EnvironmentClass {
         this.set(AppConfig);
         return this;
     }
-    get App(): AppConfig {
-        return this.get("App");
+    get App() {
+        return this.get(AppConfig);
     }
 }
 class AppConfig extends Config {

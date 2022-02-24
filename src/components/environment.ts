@@ -181,7 +181,11 @@ export class Environment extends EventEmitter {
         if (!this._registry.has(key)) throw new ServerError("unable to fetch unknown environment for `" + key + "` config");
         return this._registry.get(key)! as T;
     }
-    get = <T extends Config>(key: string): T => {
+    get = <T extends Config>(key: string | ((new ($this: Environment) => T))): T => {
+        if (typeof key !== "string") {
+            return this.getConfig<T>(key.name.replace(new RegExp("(Config|_config|-config)$"), "")) as T;
+        }
+
         return this.getConfig<T>(key);
     };
     set = (key: string | ConfigConstructable, value?: ConfigConstructable) => {
