@@ -22,21 +22,21 @@ interface FirestoreConfig {
    },
    override?: boolean;
 }
-interface HttpConfig{
+interface HttpConfig {
    url: string,
-   auth?:{
-     username:string,
-     password:string,
+   auth?: {
+      username: string,
+      password: string,
    },
    override?: boolean;
 }
-interface FileConfig{
+interface FileConfig {
    path: string;
    override?: boolean;
 }
 export interface EnvironmentConfig {
    name: string;
-   env: "staging" | "development" | "production";
+   env: "staging" | "sandbox" | "test" | "development" | "production";
    debug: boolean;
    basePath: string;
    logPath?: string;
@@ -44,6 +44,6 @@ export interface EnvironmentConfig {
    sentry?: SentryConfig;
    aws?: AwsConfig;
    firestore?: FirestoreConfig;
-   http?:HttpConfig;
-   file?:FileConfig;
+   http?: HttpConfig;
+   file?: FileConfig;
 }
