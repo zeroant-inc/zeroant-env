@@ -53,20 +53,20 @@ export class Environment extends EventEmitter {
         this.log("|" + line, "(END ->   " + title + "  )", line + "|");
     }
     log(...arg: any[]) {
-        if (this._config.debug) console.log("[DEBUG]",...arg);
+        if (this._config.debug) console.log("[DEBUG]", ...arg);
     }
     assert(value: any, message?: string | undefined, ...arg: any[]) {
-        if (this._config.debug) console.assert(value,"[DEBUG] "+ message, ...arg);
+        if (this._config.debug) console.assert(value, "[DEBUG] " + message, ...arg);
     }
     protected async init() {
-        this.emit("init");
-        if (this._config.sentry) this.initSentry();
+        await new Promise<boolean>((resolve) => resolve(this.emit("init")));
+        if (this._config.sentry) await new Promise<any>((resolve) => resolve(this.initSentry()));
         if (this._config.firestore) await this.initFirestoreEnvironmentOveride();
         if (this._config.aws) await this.initAwsEnvironmentOveride();
         if (this._config.http) await this.initHttpEnvironmentOverride();
-        if (this._config.file) this.initFileEnvironmentOverride();
-        this.initLogHandler();
-        this.emit("ready");
+        if (this._config.file) await new Promise<any>((resolve) => resolve(this.initFileEnvironmentOverride()));
+        await new Promise<any>((resolve) => resolve(this.initLogHandler()));
+        await new Promise<boolean>((resolve) => resolve(this.emit("ready")));
     }
     initFileEnvironmentOverride() {
         if (!fs.existsSync(this._config.file!.path)) return;
@@ -133,11 +133,11 @@ export class Environment extends EventEmitter {
     }
     protected loadToProcessEnv(o: Object, override = true) {
         Object.entries(o).forEach(([k, v]) => {
-            if (!override && process.env[k] !== undefined) { 
+            if (!override && process.env[k] !== undefined) {
                 this.log(`"${k}" is already defined in \`process.env\` and was NOT overwritten`);
-                return; 
-            } 
-            if(process.env[k] !== undefined){
+                return;
+            }
+            if (process.env[k] !== undefined) {
                 this.log(`"${k}" is already defined in \`process.env\` and was overwritten`);
             }
             process.env[k] = v;
@@ -174,7 +174,7 @@ export class Environment extends EventEmitter {
         this.emit("registry", key);
         return this;
     }
-    get logger(){
+    get logger() {
         return Logger;
     }
     get config() {
